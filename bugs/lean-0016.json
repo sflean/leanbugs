@@ -1,0 +1,26 @@
+{
+  "id": "lean-0016",
+  "title": "Batteries' Vector.scanrM: compiled implementation disagrees with its definition",
+  "summary": "In Batteries, Vector.scanrM is @[implemented_by] scanrMFast, whose loop stored the accumulator from before folding in the current element instead of the new one, so every entry of the compiled result was off by one fold: Vector.scanr (· + ·) 0 #v[1, 2, 3] gave [5, 3, 0, 0] instead of [6, 5, 3, 0]. #eval and compiled code returned wrong answers, and since native_decide trusts the compiled code while the kernel uses the definition, the two prove False. Not a kernel bug: #print axioms shows the native_decide axiom. Fixed in the Batteries release for Lean v4.33.0 (first in v4.33.0-rc2).",
+  "status": "fixed",
+  "subsystem": "core-library",
+  "guarantee-broken": [
+    "compiler-soundness"
+  ],
+  "mechanism": [
+    "native-decide-quirk"
+  ],
+  "symptom": "proves-False",
+  "severity": "unsoundness",
+  "issue": "https://github.com/leanprover-community/batteries/issues/1924",
+  "fix-prs": [
+    "https://github.com/leanprover-community/batteries/pull/1925"
+  ],
+  "fixed-in": "v4.33.0",
+  "features": [
+    "native_decide",
+    "implemented_by"
+  ],
+  "repro-on": "v4.32.2",
+  "repro-source": "https://github.com/leanprover-community/batteries/issues/1924"
+}
