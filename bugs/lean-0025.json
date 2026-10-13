@@ -1,0 +1,40 @@
+{
+  "id": "lean-0025",
+  "title": "Missing kernel check for free variables in `opaque` declarations",
+  "summary": "Just as for definitions and theorems, an `opaque` declaration's value must not contain fvars. This check was missing in the kernel, letting a malicious metaprogram prove False. Comparator would have caught this (its export format cannot express fvars), as would nanoda. v4.32.0 is vulnerable; v4.32.1 and v4.33.0+ have the fix.",
+  "status": "fixed",
+  "subsystem": "kernel",
+  "severity": "unsoundness",
+  "guarantee-broken": [
+    "kernel-soundness"
+  ],
+  "mechanism": [
+    "kernel-internal"
+  ],
+  "symptom": "proves-False",
+  "fix-prs": [
+    "https://github.com/leanprover/lean4/pull/14498"
+  ],
+  "fixed-in": "v4.32.1",
+  "fools": [
+    "kernel"
+  ],
+  "discovery": [
+    "user-report",
+    "ai-assisted"
+  ],
+  "features": [
+    "opaque",
+    "metaprogramming"
+  ],
+  "links": [
+    {
+      "label": "Fix commit",
+      "url": "https://github.com/leanprover/lean4/commit/7346219967957ca3dd4302a75a849b67eed1b3cd"
+    },
+    {
+      "label": "Grunweg's critical-bugs list",
+      "url": "https://github.com/grunweg/lean-critical-bugs"
+    }
+  ]
+}

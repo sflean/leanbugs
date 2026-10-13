@@ -1,0 +1,36 @@
+{
+  "id": "lean-0017",
+  "title": "`lean_nat_mod` returned a wrong value at the small/big-nat boundary",
+  "summary": "On 64-bit systems, `lean_nat_mod` truncated when the divisor was between 2^32 and 2^64: `2^65 % (2^33+1)` returned 1 instead of 2^32+1. Root cause was the scalar/mpz line drawn at 32-bit width in `get_unsigned_int`. A route to a proof of False via kernel reduction. Pre-stable; reported and fixed the same day in nightly-2022-08-04. Would be caught by lean4lean and nanoda.",
+  "status": "fixed",
+  "subsystem": "kernel",
+  "severity": "unsoundness",
+  "guarantee-broken": [
+    "kernel-soundness"
+  ],
+  "mechanism": [
+    "kernel-internal"
+  ],
+  "symptom": "proves-False",
+  "issue": "https://github.com/leanprover/lean4/issues/1433",
+  "fools": [
+    "kernel"
+  ],
+  "discovery": [
+    "user-report"
+  ],
+  "features": [
+    "arithmetic",
+    "gmp"
+  ],
+  "links": [
+    {
+      "label": "Fix commit (bug at `lean_nat_mod`)",
+      "url": "https://github.com/leanprover/lean4/commit/386b0a75bcbccb2934cdc58d7d447b0e302865d1"
+    },
+    {
+      "label": "Grunweg's critical-bugs list",
+      "url": "https://github.com/grunweg/lean-critical-bugs"
+    }
+  ]
+}

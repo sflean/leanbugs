@@ -1,0 +1,40 @@
+{
+  "id": "lean-0016",
+  "title": "Kernel allowed `.2` projection of an existential's proof component",
+  "summary": "The kernel accepted the primitive projection `(_ : ∃ x, p).2`, a large elimination from a Prop whose inferred type does not even type-check in general. A route to False. Pre-stable; fixed in two Feb–Mar 2022 commits: Leonardo de Moura added the missing `infer_proj` check, and Gabriel Ebner then rejected the projection outright.",
+  "status": "fixed",
+  "subsystem": "kernel",
+  "severity": "unsoundness",
+  "guarantee-broken": [
+    "kernel-soundness"
+  ],
+  "mechanism": [
+    "kernel-internal"
+  ],
+  "symptom": "proves-False",
+  "fools": [
+    "kernel"
+  ],
+  "discovery": [
+    "user-report"
+  ],
+  "features": [
+    "projections",
+    "exists",
+    "large-elimination"
+  ],
+  "links": [
+    {
+      "label": "Fix commit (missing check at infer_proj, Leonardo de Moura)",
+      "url": "https://github.com/leanprover/lean4/commit/db38bc404388"
+    },
+    {
+      "label": "Fix commit (reject (_ : ∃ x, p).2, Gabriel Ebner)",
+      "url": "https://github.com/leanprover/lean4/commit/3746005f5fc3"
+    },
+    {
+      "label": "Grunweg's critical-bugs list",
+      "url": "https://github.com/grunweg/lean-critical-bugs"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "lean-0021",
+  "title": "`reduceBool` / `native_decide` axiom leakage",
+  "summary": "The kernel evaluated `Lean.reduceBool` natively but tracked no axiom dependency, so a proof that relied on compiler correctness showed *no* axioms in `#print axioms`. Demonstrated with `IO.getRandomBytes`: the same expression reduced non-deterministically to different `Bool` values, yielding a proof of False with no reported axioms. The fix introduced an explicit `trustCompiler` axiom that `reduceBool`/`reduceNat` depend on, so `#print axioms` reports the dependency. Historical ancestor of lean-0003 along the native_decide bridge.",
+  "status": "fixed",
+  "subsystem": "kernel",
+  "severity": "unsoundness",
+  "guarantee-broken": [
+    "compiler-soundness",
+    "reporting-faithfulness"
+  ],
+  "mechanism": [
+    "native-decide-quirk"
+  ],
+  "symptom": "proves-False",
+  "fix-prs": [
+    "https://github.com/leanprover/lean4/pull/2654"
+  ],
+  "fixed-in": "v4.2.0",
+  "zulip": "https://leanprover-community.github.io/archive/stream/270676-lean4/topic/soundness.20bug.3A.20native_decide.20leakage.html",
+  "fools": [
+    "kernel",
+    "print-axioms"
+  ],
+  "discovery": [
+    "user-report"
+  ],
+  "features": [
+    "native_decide",
+    "reduceBool",
+    "io"
+  ],
+  "links": [
+    {
+      "label": "mathlib4#2656 (made `IO.RealWorld` opaque to block the concrete exploit)",
+      "url": "https://github.com/leanprover-community/mathlib4/pull/2656"
+    },
+    {
+      "label": "Grunweg's critical-bugs list",
+      "url": "https://github.com/grunweg/lean-critical-bugs"
+    }
+  ]
+}

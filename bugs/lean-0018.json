@@ -1,0 +1,38 @@
+{
+  "id": "lean-0018",
+  "title": "Universe-level offset dropped in `IMax` normalization",
+  "summary": "In `normalize`, the `IMax` case returned `mk_imax(l1, l2)` and dropped the split-off offset; the fix returns `mk_succ(mk_imax(l1, l2), offset)`. A universe of the form `imax _ _ + k` normalized to `imax _ _`, losing the `+k`, so distinct universes were conflated — kernel unsoundness. Pre-stable; fixed Oct 2022.",
+  "status": "fixed",
+  "subsystem": "kernel",
+  "severity": "unsoundness",
+  "guarantee-broken": [
+    "kernel-soundness"
+  ],
+  "mechanism": [
+    "kernel-internal"
+  ],
+  "symptom": "proves-False",
+  "fix-prs": [
+    "https://github.com/leanprover/lean4/pull/1781"
+  ],
+  "fools": [
+    "kernel"
+  ],
+  "discovery": [
+    "user-report"
+  ],
+  "features": [
+    "universes",
+    "normalization"
+  ],
+  "links": [
+    {
+      "label": "Fix commit (bug in level normalization)",
+      "url": "https://github.com/leanprover/lean4/commit/a086d217a5f9d4c7e30bca92b8cc87795875570c"
+    },
+    {
+      "label": "Grunweg's critical-bugs list",
+      "url": "https://github.com/grunweg/lean-critical-bugs"
+    }
+  ]
+}

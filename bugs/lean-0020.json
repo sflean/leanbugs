@@ -1,0 +1,35 @@
+{
+  "id": "lean-0020",
+  "title": "Kernel accepted self-referential indices in inductive types",
+  "summary": "The kernel accepted occurrences of an inductive type within its own indices, e.g. `inductive C : Bool → Type | c : C (f (C false))` with `f = Nonempty`. A direct route to False. Pre-stable; reported and fixed Feb 2023.",
+  "status": "fixed",
+  "subsystem": "kernel",
+  "severity": "unsoundness",
+  "guarantee-broken": [
+    "kernel-soundness"
+  ],
+  "mechanism": [
+    "kernel-internal"
+  ],
+  "symptom": "proves-False",
+  "issue": "https://github.com/leanprover/lean4/issues/2125",
+  "fix-prs": [
+    "https://github.com/leanprover/lean4/pull/2127"
+  ],
+  "fools": [
+    "kernel"
+  ],
+  "discovery": [
+    "user-report"
+  ],
+  "features": [
+    "inductive-types",
+    "self-reference"
+  ],
+  "links": [
+    {
+      "label": "Grunweg's critical-bugs list",
+      "url": "https://github.com/grunweg/lean-critical-bugs"
+    }
+  ]
+}

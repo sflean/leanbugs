@@ -1,0 +1,39 @@
+{
+  "id": "lean-0022",
+  "title": "Kernel treated constants as `Nat` literals when reducing `Nat.pow`",
+  "summary": "A missing check in the kernel's `Nat.pow` reduction falsely interpreted an expression as a `Nat` literal. With GMP enabled (the default), this is a soundness bug: one can prove False. With GMP disabled, the kernel instead crashes on some inputs. Would be caught by lean4lean and nanoda. Affects stable versions 4.14.0 through 4.19.0 inclusive.",
+  "status": "fixed",
+  "subsystem": "kernel",
+  "severity": "unsoundness",
+  "guarantee-broken": [
+    "kernel-soundness"
+  ],
+  "mechanism": [
+    "kernel-internal"
+  ],
+  "symptom": "proves-False",
+  "fix-prs": [
+    "https://github.com/leanprover/lean4/pull/8060"
+  ],
+  "fixed-in": "v4.20.0",
+  "fools": [
+    "kernel"
+  ],
+  "discovery": [
+    "user-report"
+  ],
+  "features": [
+    "arithmetic",
+    "nat-literals"
+  ],
+  "links": [
+    {
+      "label": "Fix commit",
+      "url": "https://github.com/leanprover/lean4/commit/57915af218086affceebcb9135811df05e5af083"
+    },
+    {
+      "label": "Grunweg's critical-bugs list",
+      "url": "https://github.com/grunweg/lean-critical-bugs"
+    }
+  ]
+}

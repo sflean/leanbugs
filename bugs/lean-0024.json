@@ -1,0 +1,34 @@
+{
+  "id": "lean-0024",
+  "title": "Buffer overflow in `lean_io_prim_handle_read`",
+  "summary": "`IO.FS.Handle.read` with a large value of `n` could cause a buffer overflow, leading to a crash. Not a soundness bug on its own, but software verified in Lean to be correct could still carry a runtime vulnerability through this primitive. Fixed in 4.28.1 and 4.29.1 (backports); 4.30.0+ carry the fix.",
+  "status": "fixed",
+  "subsystem": "runtime",
+  "severity": "crash",
+  "mechanism": [
+    "memory-safety"
+  ],
+  "symptom": "crash",
+  "issue": "https://github.com/leanprover/lean4/issues/13388",
+  "fix-prs": [
+    "https://github.com/leanprover/lean4/pull/13392"
+  ],
+  "fixed-in": "v4.28.1",
+  "discovery": [
+    "user-report"
+  ],
+  "features": [
+    "io",
+    "file-handles"
+  ],
+  "links": [
+    {
+      "label": "Fix commit",
+      "url": "https://github.com/leanprover/lean4/commit/9db52c7fa6f0bdf1ce77ee054aaa948d43d0d48e"
+    },
+    {
+      "label": "Grunweg's critical-bugs list",
+      "url": "https://github.com/grunweg/lean-critical-bugs"
+    }
+  ]
+}

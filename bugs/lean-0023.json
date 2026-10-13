@@ -1,0 +1,42 @@
+{
+  "id": "lean-0023",
+  "title": "`Expr.Data` and `Level.Data` were not conservative on extreme-depth expressions",
+  "summary": "`Expr.hasLooseBVars`, `Expr.hasFVar`, `Expr.hasMVar` and friends read from the fixed-size `Expr.Data` / `Level.Data` bitfield. On overflow the kernel's `assert!`/`panic!` did not actually abort, so Lean continued with the default `0`, meaning expressions appeared to have no loose bvars / fvars / mvars when they did — a route to False. Mario Carneiro's technical write-up and proposed redesign of `Expr.Data` landed as closed PR #8554; the actual merged fix took a different approach, hardening `assert!` to abort (PRs #8559 and #8560). Affects stable versions 4.0.0 through 4.20.0 inclusive.",
+  "status": "fixed",
+  "subsystem": "kernel",
+  "severity": "unsoundness",
+  "guarantee-broken": [
+    "kernel-soundness"
+  ],
+  "mechanism": [
+    "kernel-internal"
+  ],
+  "symptom": "proves-False",
+  "fix-prs": [
+    "https://github.com/leanprover/lean4/pull/8559",
+    "https://github.com/leanprover/lean4/pull/8560"
+  ],
+  "fixed-in": "v4.21.0",
+  "zulip": "https://leanprover.zulipchat.com/#narrow/channel/270676-lean4/topic/Soundness.20bug.3A.20hasLooseBVars.20is.20not.20conservative/near/521286338",
+  "fools": [
+    "kernel"
+  ],
+  "discovery": [
+    "user-report"
+  ],
+  "features": [
+    "deep-expressions",
+    "bvar",
+    "assert"
+  ],
+  "links": [
+    {
+      "label": "Carneiro's write-up and alternative fix (closed PR #8554)",
+      "url": "https://github.com/leanprover/lean4/pull/8554"
+    },
+    {
+      "label": "Grunweg's critical-bugs list",
+      "url": "https://github.com/grunweg/lean-critical-bugs"
+    }
+  ]
+}

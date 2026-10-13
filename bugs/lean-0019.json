@@ -1,0 +1,34 @@
+{
+  "id": "lean-0019",
+  "title": "`safe` definitions could reference `partial` ones",
+  "summary": "The kernel did not ensure that `safe` functions could not use `partial` ones. Since `partial` definitions are effectively opaque, referencing one from `safe` code let you treat an arbitrary inhabitant as real — a route to False. Same class as lean-0013 but kernel-level and years earlier. Pre-stable; fixed Jan 2023.",
+  "status": "fixed",
+  "subsystem": "kernel",
+  "severity": "unsoundness",
+  "guarantee-broken": [
+    "kernel-soundness"
+  ],
+  "mechanism": [
+    "kernel-internal"
+  ],
+  "symptom": "proves-False",
+  "fools": [
+    "kernel"
+  ],
+  "discovery": [
+    "user-report"
+  ],
+  "features": [
+    "partial"
+  ],
+  "links": [
+    {
+      "label": "Fix commit (Leonardo de Moura, 2023-01-27)",
+      "url": "https://github.com/leanprover/lean4/commit/decb08858f4d"
+    },
+    {
+      "label": "Grunweg's critical-bugs list",
+      "url": "https://github.com/grunweg/lean-critical-bugs"
+    }
+  ]
+}
