@@ -30,6 +30,10 @@
     {
       "label": "Trail of Bits write-up",
       "url": "https://blog.trailofbits.com/2026/09/09/a-proof-of-fermats-last-theorem-that-fits-the-margin/"
+    },
+    {
+      "label": "Checked by Tenet, tenet-hs and tenet-jvm (independent kernels)",
+      "url": "https://github.com/keithadler/tenet-jvm/blob/main/docs/leanbugs.md"
     }
   ],
   "repro-on": "v4.33.1",

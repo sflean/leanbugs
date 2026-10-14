@@ -50,7 +50,7 @@ def severities : List String :=
 
 def checkers : List String :=
   ["kernel", "lean4checker", "lean4lean", "nanoda", "ind-models", "con-leche", "SafeVerify",
-   "Comparator", "print-axioms"]
+   "Comparator", "print-axioms", "Tenet", "tenet-hs", "tenet-jvm"]
 
 def discoveries : List String :=
   ["user-report", "fro-bug-hunt", "ai-assisted", "external-security-research",

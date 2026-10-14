@@ -21,6 +21,10 @@
     {
       "label": "Lean4Lean bugs-found.md",
       "url": "https://github.com/digama0/lean4lean/blob/master/bugs-found.md"
+    },
+    {
+      "label": "Checked by Tenet, tenet-hs and tenet-jvm (independent kernels)",
+      "url": "https://github.com/keithadler/tenet-jvm/blob/main/docs/leanbugs.md"
     }
   ],
   "repro-on": "v4.24.0",

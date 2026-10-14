@@ -31,6 +31,10 @@
     {
       "label": "Bug hunt postmortem (Leo de Moura)",
       "url": "https://leodemoura.github.io/blog/2026-8-24-postmortem-for-the-kernel-soundness-bug-hunt/"
+    },
+    {
+      "label": "Checked by Tenet, tenet-hs and tenet-jvm (independent kernels)",
+      "url": "https://github.com/keithadler/tenet-jvm/blob/main/docs/leanbugs.md"
     }
   ],
   "repro-on": "v4.32.1",
