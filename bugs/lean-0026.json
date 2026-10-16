@@ -1,0 +1,35 @@
+{
+  "id": "lean-0026",
+  "title": "Kernel grants large elimination to a Prop inductive through a dishonest autoParam, allowing an axiom-free proof of False",
+  "summary": "The kernel's inductive checker strips `autoParam`/`optParam`/`outParam`/`semiOutParam` from binder domains by constant name alone, without checking how those constants are defined. `elim_only_at_universe_zero` also builds the constructor's parameters from the constructor's own (stripped) binder domains rather than from the header parameters that `check_constructors` uses. With a root-level `autoParam (A : Type) (B : Type 1) := B`, a constructor parameter `(p : autoParam Prop Type)` unfolds to `Type` for `check_constructors` but is stripped to `Prop` for the elimination check. A field `x : p` is then treated as a proof, so `P (p : Type) : Prop` gets a recursor into `Sort u`, and proof irrelevance gives a proof of False with no axioms. Reachable only through metaprogramming that sends declarations directly to the kernel, in an environment without Init's honest `autoParam` (built from `Init.Prelude`, or a `prelude` module).",
+  "status": "open",
+  "subsystem": "kernel",
+  "guarantee-broken": [
+    "kernel-soundness"
+  ],
+  "mechanism": [
+    "kernel-internal"
+  ],
+  "symptom": "proves-False",
+  "severity": "unsoundness",
+  "issue": "https://github.com/leanprover/lean4/issues/15704",
+  "fix-prs": [
+    "https://github.com/leanprover/lean4/pull/15707"
+  ],
+  "fools": [
+    "kernel"
+  ],
+  "features": [
+    "inductive-types",
+    "large-elimination",
+    "metaprogramming"
+  ],
+  "links": [
+    {
+      "label": "Proof of concept (gersh/lean-kernel-bug)",
+      "url": "https://github.com/gersh/lean-kernel-bug"
+    }
+  ],
+  "repro-on": "v4.35.0",
+  "repro-source": "https://github.com/gersh/lean-kernel-bug"
+}
